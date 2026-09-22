@@ -4,6 +4,8 @@ A small interactive 3D solar-system scene implemented in C++ with the fixed-func
 
 This project was developed as part of postgraduate diploma coursework in computer graphics.
 
+![Solar System OpenGL Simulation](Screenshot.png)
+
 ## Objectives
 
 - Practice 2D and 3D rendering with OpenGL primitives.
