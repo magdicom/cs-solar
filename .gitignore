@@ -1,0 +1,36 @@
+# Code::Blocks / MinGW build output
+bin/
+obj/
+*.o
+*.a
+*.dll
+*.exe
+
+# Generated Code::Blocks files and local workspace state
+*.depend
+*.layout
+
+# Visual Studio and other IDE metadata
+.vs/
+.vscode/
+*.suo
+*.user
+
+# Logs, crash dumps, and temporary files
+*.log
+*.dmp
+*.tmp
+*.bak
+*.swp
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Superseded screenshot backup containing private academic information
+Screenshot-2.png
