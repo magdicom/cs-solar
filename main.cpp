@@ -31,7 +31,7 @@ float stars[numStars][3]; // Array to store star positions
 // Define the vertices for the Earth's surface
 std::vector<std::vector<float>> earthVertices;
 
-// Define polygons for landmasses (green) and water (blue)
+// Define green and blue regions for the Earth's checkerboard-style surface
 std::vector<std::vector<int>> landPolygons;
 std::vector<std::vector<int>> waterPolygons;
 
@@ -161,7 +161,7 @@ void initEarth() {
         }
     }
 
-    // Define land and water polygons
+    // Define green and blue regions for the Earth's checkerboard-style surface
     for (int lat = 0; lat < 18; ++lat) {
         for (int lon = 0; lon < 36; ++lon) {
             int v0 = lat * 37 + lon;
@@ -169,7 +169,7 @@ void initEarth() {
             int v2 = (lat + 1) * 37 + lon;
             int v3 = v2 + 1;
 
-            // Alternate between land and water polygons
+            // Alternate between green and blue surface regions
             if ((lat + lon) % 2 == 0) {
                 landPolygons.push_back({v0, v2, v1});
                 landPolygons.push_back({v1, v2, v3});
@@ -299,6 +299,7 @@ void drawISSThree() {
     GLUquadricObj* quadric = gluNewQuadric();
     gluQuadricDrawStyle(quadric, GLU_FILL);
     gluCylinder(quadric, 0.1, 0.1, 0.4, 20, 20);
+    gluDeleteQuadric(quadric);
 
     // Draw the solar panels (rectangular prisms)
     glColor3f(0.6f, 0.6f, 0.6f); // Dark gray color for solar panels
@@ -325,13 +326,13 @@ void drawISSThree() {
     glutSolidCube(1.0);
     glPopMatrix();
 
-    // Position and rotate for the "NASA" text
+    // Position and rotate for the SOHO mission text
     glPushMatrix();
     glTranslatef(-0.15f, 0.35f, 0.0f); // Adjust position
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f); // Adjust rotation
     glScalef(0.01f, 0.01f, 0.01f); // Adjust text size
 
-    // Render the text "NASA" on the side of the ISS
+    // Render the SOHO mission text on the side of the ISS
     glColor3f(1.0, 1.0, 1.0); // Set text color (e.g., white)
     renderText("Solar and Heliospheric Observatory (SOHO) Mission");
 
@@ -456,11 +457,11 @@ void drawEarth() {
     glScalef(0.3f, 0.3f, 0.3f); // Scale Earth
 
 
-    // Draw the Earth's surface with land and water polygons
+    // Draw the Earth's checkerboard-style surface
 
     glBegin(GL_TRIANGLES);
 
-    // Draw land polygons (green)
+    // Draw green surface regions
     glColor3f(0.0f, 0.6f, 0.0f); // Green color
     for (const auto& polygon : landPolygons) {
         for (const auto& vertexIndex : polygon) {
@@ -468,7 +469,7 @@ void drawEarth() {
         }
     }
 
-    // Draw water polygons (blue)
+    // Draw blue surface regions
     glColor3f(0.0f, 0.0f, 1.0f); // Blue color
     for (const auto& polygon : waterPolygons) {
         for (const auto& vertexIndex : polygon) {
@@ -521,11 +522,11 @@ void drawJupiter() {
 }
 
 void drawVega() {
-    // Draw Vega as a point source of light
+    // Draw Vega as a point marker
     glPushMatrix();
     glTranslatef(-5.0f, 4.5f, -5.0f); // Position Vega in the scene
 
-    // Set the color and size for Vega (e.g., white point of light)
+    // Set the color and size for Vega's point marker
     glColor3f(1.0f, 1.0f, 1.0f);
     glPointSize(5.0f); // Adjust the point size as needed
 
@@ -558,7 +559,8 @@ void drawSun() {
     glPushMatrix();
     glTranslatef(0.0f, 0.0f, -5.0f); // Move the Sun away from the camera
 
-    // Apply rotation to the Sun to make it appear to rotate around its axis
+    // Apply the stored Sun rotation angle; the stylized sphere construction
+    // does not make this rotation visibly meaningful
     glRotatef(sunAngle, 0.0f, 1.0f, 0.0f);
 
     // Define multi-colors for the Sun's surface
@@ -637,12 +639,12 @@ void reshape(int width, int height) {
 }
 
 void timer(int value) {
-    // Update the Sun's rotation angle (to make it appear to rotate)
+    // Update the stored Sun rotation angle
     if (startAnimation) {
         sunAngle += 0.5f;
     }
 
-    // Update the Sun's orbit angle (to make it orbit around its axis)
+    // Update the angle used for the planetary orbit animation
     if (startAnimation) {
         sunOrbitAngle += 0.2f;
     }

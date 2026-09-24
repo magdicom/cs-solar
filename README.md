@@ -1,6 +1,6 @@
 # Solar System OpenGL Simulation
 
-A small interactive 3D solar-system scene implemented in C++ with the fixed-function OpenGL API and FreeGLUT. The application renders a stylized Sun, Earth, Jupiter, stars, Vega, a black hole, and two representations of the ISS, with simple animation and keyboard/mouse interaction.
+A small interactive 3D solar-system scene implemented in C++ with the fixed-function OpenGL API and FreeGLUT. The application renders a stylized Sun, Earth, Jupiter, stars, a Vega point marker, a black hole, and two representations of the ISS, with simple animation and keyboard/mouse interaction.
 
 This project was developed as part of postgraduate diploma coursework in computer graphics.
 
@@ -17,17 +17,17 @@ This project was developed as part of postgraduate diploma coursework in compute
 
 - Procedurally generated star field.
 - Stylized Sun, Earth, and Jupiter models built from OpenGL primitives and generated vertices.
-- Simplified ISS models, Vega point light representation, and black-hole illustration.
+- Simplified ISS models, a Vega point-marker representation, and a black-hole illustration.
 - Perspective camera and depth-buffered rendering.
 - Toggle animation with the `S` key or left mouse button.
-- Animated planetary angles, Sun rotation, ISS movement, and typewriter-style scene text.
+- Animated orbit/rotation angles, ISS movement, and typewriter-style scene text. The Sun's rotation angle is updated, although the stylized overlapping-sphere construction does not make that rotation visibly meaningful.
 
 ## Technology stack
 
 - C++
 - OpenGL and GLU (legacy fixed-function pipeline)
 - FreeGLUT / GLUT-compatible headers and libraries
-- Windows API integration through `windows.h`
+- Windows-specific dependency through `windows.h`
 - Code::Blocks project configuration with MinGW/GCC
 
 There is no database, network service, environment-variable configuration, package manager manifest, or external runtime service in this project.
@@ -40,6 +40,7 @@ There is no database, network service, environment-variable configuration, packa
 ├── Solar.cbp      # Code::Blocks project file
 ├── Screenshot.png # Example application screenshot
 ├── .gitignore     # Publication and build-artifact exclusions
+├── LICENSE        # MIT license
 └── README.md      # Project documentation
 ```
 
